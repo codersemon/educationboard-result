@@ -62,14 +62,11 @@ function timeAgo(timestamp) {
   } else if (diff >= 3600 && diff < 86400) {
     let hour = Math.floor(diff / 3600);
     let min = Math.floor((diff % 3600) / 60);
-    let sec = Math.floor(diff % 60);
-    time = `${hour}h ${min}m ${sec}s ago`;
+    time = `${hour}h ${min}m ago`;
   } else if (diff >= 86400) {
     let day = Math.floor(diff / 86400);
     let hour = Math.floor((diff % 86400) / 3600);
-    let min = Math.floor((diff % 3600) / 60);
-    let sec = Math.floor(diff % 60);
-    time = `${day}d ${hour}h ${min}m ${sec}s ago`;
+    time = `${day}d ${hour}h ago`;
   }
   return time;
 }
