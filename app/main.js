@@ -158,3 +158,12 @@ function showSingleStudent(roll) {
     </div>
   </div>`;
 }
+
+/**********************
+ * Reload Student View
+ **********************/
+const reloadStudentView = document.getElementById('students_view_reload');
+reloadStudentView.onclick = (e) => {
+  // show new students
+  showStudentsData();
+}
