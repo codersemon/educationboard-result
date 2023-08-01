@@ -67,7 +67,7 @@ function showStudentsData() {
         <td>${student.stu_name}</td>
         <td>${student.stu_roll}</td>
         <td>${student.stu_reg}</td>
-        <td>5 mins ago</td>
+        <td>${timeAgo(student.created_at)}</td>
         <td>
           <button class="btn btn-success">Add Result</button>
         </td>
