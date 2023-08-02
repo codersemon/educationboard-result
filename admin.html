@@ -154,10 +154,10 @@
                         />
                       </div>
                       <div class="mb-2">
-                        <input type="hidden" name="id">
+                        <input type="hidden" name="id" />
                       </div>
                       <div class="mb-2">
-                        <img class="img-fluid" id="edit_prev">
+                        <img class="img-fluid" id="edit_prev" />
                       </div>
                       <div class="mb-2">
                         <button type="submit" class="btn btn-primary">
@@ -236,7 +236,7 @@
                         />
                       </div>
                       <div class="mb-2">
-                        <input type="hidden" name="id">
+                        <input type="hidden" name="id" />
                       </div>
                       <div class="mb-2">
                         <button type="submit" class="btn btn-primary">
@@ -251,9 +251,32 @@
             </div>
             <!-- Add Result Modal End  -->
 
+            <!-- View Result Modal Start  -->
+            <div class="modal fade" id="viewResult">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5">Result Details</h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <h2>Result is comming soon! ☺</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- View Result Modal End  -->
+
             <div class="card shadow">
               <div class="card-body">
-                <button class="btn btn-secondary" id="students_view_reload"><i class="fa-solid fa-rotate"></i></button>
+                <button class="btn btn-secondary" id="students_view_reload">
+                  <i class="fa-solid fa-rotate"></i>
+                </button>
                 <table class="table table-striped mt-2">
                   <thead class="table-info">
                     <tr>

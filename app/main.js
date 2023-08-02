@@ -83,7 +83,7 @@ function showStudentsData() {
         <td>${student.stu_reg}</td>
         <td>${timeAgo(student.created_at)}</td>
         <td>
-          ${student.result == null ? `<button class="btn btn-success" onclick="addResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#addResult">Add Result</button>` : `<button class="btn btn-info">View Result</button>`}
+          ${student.result == null ? `<button class="btn btn-success" onclick="addResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#addResult">Add Result</button>` : `<button class="btn btn-info" onclick="showStudentResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#viewResult">View Result</button>`}
         </td>
         <td>
           <button class="btn btn-info" onclick="showSingleStudent('${
@@ -287,3 +287,9 @@ addResultForm.onsubmit = (e) => {
   }
 }
 
+/**********************
+ * View / Show Student Result
+ **********************/
+function showStudentResult(id){
+  
+}
