@@ -188,6 +188,7 @@ reloadStudentView.onclick = (e) => {
  **********************/
 const editStudentForm = document.getElementById("editStudentForm");
 const editImgPrev = document.getElementById("edit_prev");
+const editMsg = document.querySelector('.edit-msg');
 function editSingleStudent(id) {
   // select student data
   const student = studentsInfo.filter((item) => item.id == id);
@@ -201,12 +202,11 @@ function editSingleStudent(id) {
     student[0].stu_reg;
   editStudentForm.querySelector('input[name="stu_photo"]').value =
     student[0].stu_photo;
-  editStudentForm.querySelector('input[name="id"]').value =
-    student[0].id;
+  editStudentForm.querySelector('input[name="id"]').value = student[0].id;
   editImgPrev.setAttribute("src", student[0].stu_photo);
 }
 
-// update student form handle
+// update student data on edit form submit
 editStudentForm.onsubmit = (e) => {
   e.preventDefault();
 
@@ -214,18 +214,31 @@ editStudentForm.onsubmit = (e) => {
   const form_data = new FormData(e.target);
   const data = Object.fromEntries(form_data.entries());
 
-  // get student data index 
-  const stuIndex = studentsInfo.findIndex(item => item.id == data.id);
+  // data validation
+  if (!data.stu_name || !data.stu_roll || !data.stu_reg) {
+    editMsg.innerHTML = createAlert("All fields are required!", "danger");
+  } else if (
+    !isNumber(parseInt(data.stu_roll)) ||
+    !isNumber(parseInt(data.stu_reg))
+  ) {
+    editMsg.innerHTML = createAlert("Roll & Reg must be number!", "danger");
+  } else {
+    // get student data index
+    const stuIndex = studentsInfo.findIndex((item) => item.id == data.id);
 
-  // update data in array 
-  studentsInfo[stuIndex] = {
-    ...studentsInfo[stuIndex],
-    ...data
+    // update data in array
+    studentsInfo[stuIndex] = {
+      ...studentsInfo[stuIndex],
+      ...data,
+    };
+
+    // send data to LS
+    sendDataLS("students", studentsInfo);
+
+    // show students view
+    showStudentsData();
+
+    // Update msg 
+    editMsg.innerHTML = createAlert("Data update success!", "success");
   }
-
-  // send data to LS 
-  sendDataLS('students', studentsInfo);
-
-  // show students view 
-  showStudentsData();  
 };
