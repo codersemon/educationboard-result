@@ -42,7 +42,7 @@ newStudentForm.onsubmit = (e) => {
       ...data,
       result: null,
       created_at: Date.now(),
-      id: generateUniqueID()
+      id: generateUniqueID(),
     });
 
     // send new data to LS
@@ -91,7 +91,9 @@ function showStudentsData() {
           }')" data-bs-target="#singleStudentModal" data-bs-toggle="modal">
             <i class="fa-regular fa-eye"></i>
           </button>
-          <button class="btn btn-warning">
+          <button class="btn btn-warning" onclick="editSingleStudent('${
+            student.id
+          }')" data-bs-target="#editStudent" data-bs-toggle="modal">
             <i class="fa-regular fa-pen-to-square"></i>
           </button>
           <button class="btn btn-danger" onclick="deleteStudent('${
@@ -133,9 +135,7 @@ function deleteStudent(id) {
 const singleStudentWrap = document.querySelector(".single-student-wrap");
 function showSingleStudent(id) {
   // get student by roll
-  const singleStudent = studentsInfo.filter(
-    (student) => student.id == id
-  );
+  const singleStudent = studentsInfo.filter((student) => student.id == id);
 
   singleStudentWrap.innerHTML = `<div class="modal-header">
     <h1 class="modal-title fs-5">${singleStudent[0].stu_name} Details</h1>
@@ -186,6 +186,46 @@ reloadStudentView.onclick = (e) => {
 /**********************
  * Edit student data
  **********************/
-function editSingleStudent(){
+const editStudentForm = document.getElementById("editStudentForm");
+const editImgPrev = document.getElementById("edit_prev");
+function editSingleStudent(id) {
+  // select student data
+  const student = studentsInfo.filter((item) => item.id == id);
 
+  // show student data in edit form
+  editStudentForm.querySelector('input[name="stu_name"]').value =
+    student[0].stu_name;
+  editStudentForm.querySelector('input[name="stu_roll"]').value =
+    student[0].stu_roll;
+  editStudentForm.querySelector('input[name="stu_reg"]').value =
+    student[0].stu_reg;
+  editStudentForm.querySelector('input[name="stu_photo"]').value =
+    student[0].stu_photo;
+  editStudentForm.querySelector('input[name="id"]').value =
+    student[0].id;
+  editImgPrev.setAttribute("src", student[0].stu_photo);
 }
+
+// update student form handle
+editStudentForm.onsubmit = (e) => {
+  e.preventDefault();
+
+  // get new data on form submit
+  const form_data = new FormData(e.target);
+  const data = Object.fromEntries(form_data.entries());
+
+  // get student data index 
+  const stuIndex = studentsInfo.findIndex(item => item.id == data.id);
+
+  // update data in array 
+  studentsInfo[stuIndex] = {
+    ...studentsInfo[stuIndex],
+    ...data
+  }
+
+  // send data to LS 
+  sendDataLS('students', studentsInfo);
+
+  // show students view 
+  showStudentsData();  
+};

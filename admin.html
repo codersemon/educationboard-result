@@ -120,7 +120,7 @@
                     ></button>
                   </div>
                   <div class="modal-body">
-                    <form id="newStudentForm">
+                    <form id="editStudentForm">
                       <div class="mb-2">
                         <input
                           type="text"
@@ -154,11 +154,14 @@
                         />
                       </div>
                       <div class="mb-2">
+                        <input type="hidden" name="id">
+                      </div>
+                      <div class="mb-2">
+                        <img class="img-fluid" id="edit_prev">
+                      </div>
+                      <div class="mb-2">
                         <button type="submit" class="btn btn-primary">
-                          Create
-                        </button>
-                        <button type="reset" class="btn btn-danger">
-                          Reset
+                          Update
                         </button>
                       </div>
                       <div class="msg"></div>
