@@ -83,7 +83,7 @@ function showStudentsData() {
         <td>${student.stu_reg}</td>
         <td>${timeAgo(student.created_at)}</td>
         <td>
-          <button class="btn btn-success">Add Result</button>
+          ${student.result == null ? `<button class="btn btn-success" onclick="addResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#addResult">Add Result</button>` : `<button class="btn btn-info">View Result</button>`}
         </td>
         <td>
           <button class="btn btn-info" onclick="showSingleStudent('${
@@ -242,3 +242,48 @@ editStudentForm.onsubmit = (e) => {
     editMsg.innerHTML = createAlert("Data update success!", "success");
   }
 };
+
+/**********************
+ * Add Student Result
+ **********************/
+const addResultForm = document.getElementById('addResultForm');
+const resultMsg = document.querySelector('.result-msg');
+function addResult(id){
+  addResultForm.querySelector('input[name="id"]').value = id;
+}
+
+// add result to db on form submit 
+addResultForm.onsubmit = (e) => {
+  e.preventDefault();
+
+  // get marks from input 
+  const form_data = new FormData(e.target);
+  const data = Object.fromEntries(form_data.entries());
+
+  // data validation 
+  if(!data.bangla || !data.english || !data.math || !data.science || !data.social_science || !data.religion){
+    resultMsg.innerHTML = createAlert('All fields required!', 'danger');
+  }else{
+    // student data index
+    const stuIndex = studentsInfo.findIndex(item => item.id === data.id);
+
+    // data without id 
+    const {id, ...dataWithoutId} = data;
+
+    // add student result 
+    studentsInfo[stuIndex] = {
+      ...studentsInfo[stuIndex],
+      result : dataWithoutId
+    }
+
+    // send to LS 
+    sendDataLS('students', studentsInfo);
+
+    // reload student view 
+    showStudentsData();
+
+    // save success msg 
+    resultMsg.innerHTML = createAlert('Save success!', 'success');
+  }
+}
+

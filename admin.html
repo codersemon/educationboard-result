@@ -172,6 +172,85 @@
             </div>
             <!-- Single Student Edit Modal End  -->
 
+            <!-- Add Result Modal Modal Start  -->
+            <div class="modal fade" id="addResult">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5">Add Result</h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="addResultForm">
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="bangla"
+                          class="form-control"
+                          placeholder="Bangla Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="english"
+                          class="form-control"
+                          placeholder="English Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="math"
+                          class="form-control"
+                          placeholder="Math Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="science"
+                          class="form-control"
+                          placeholder="Science Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="social_science"
+                          class="form-control"
+                          placeholder="Social Science Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="religion"
+                          class="form-control"
+                          placeholder="Religion Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input type="hidden" name="id">
+                      </div>
+                      <div class="mb-2">
+                        <button type="submit" class="btn btn-primary">
+                          Save Result
+                        </button>
+                      </div>
+                      <div class="result-msg"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Add Result Modal End  -->
+
             <div class="card shadow">
               <div class="card-body">
                 <button class="btn btn-secondary" id="students_view_reload"><i class="fa-solid fa-rotate"></i></button>
