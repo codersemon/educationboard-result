@@ -42,6 +42,7 @@ newStudentForm.onsubmit = (e) => {
       ...data,
       result: null,
       created_at: Date.now(),
+      id: generateUniqueID()
     });
 
     // send new data to LS
@@ -86,7 +87,7 @@ function showStudentsData() {
         </td>
         <td>
           <button class="btn btn-info" onclick="showSingleStudent('${
-            student.stu_roll
+            student.id
           }')" data-bs-target="#singleStudentModal" data-bs-toggle="modal">
             <i class="fa-regular fa-eye"></i>
           </button>
@@ -94,7 +95,7 @@ function showStudentsData() {
             <i class="fa-regular fa-pen-to-square"></i>
           </button>
           <button class="btn btn-danger" onclick="deleteStudent('${
-            student.stu_roll
+            student.id
           }')">
               <i class="fa-light fa-trash"></i>
           </button>
@@ -112,9 +113,9 @@ showStudentsData();
 /****************************
  * Delete student data
  ***************************/
-function deleteStudent(roll) {
+function deleteStudent(id) {
   // get students except deleted student
-  const newStudents = studentsInfo.filter((item) => item.stu_roll != roll);
+  const newStudents = studentsInfo.filter((item) => item.id != id);
 
   // update studentsInfo with new  data
   studentsInfo = newStudents;
@@ -130,10 +131,10 @@ function deleteStudent(roll) {
  * Show Single student
  ***************************/
 const singleStudentWrap = document.querySelector(".single-student-wrap");
-function showSingleStudent(roll) {
+function showSingleStudent(id) {
   // get student by roll
   const singleStudent = studentsInfo.filter(
-    (student) => student.stu_roll == roll
+    (student) => student.id == id
   );
 
   singleStudentWrap.innerHTML = `<div class="modal-header">
