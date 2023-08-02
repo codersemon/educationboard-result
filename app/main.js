@@ -181,3 +181,10 @@ reloadStudentView.onclick = (e) => {
   // show new students
   showStudentsData();
 };
+
+/**********************
+ * Edit student data
+ **********************/
+function editSingleStudent(){
+
+}

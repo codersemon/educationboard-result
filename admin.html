@@ -106,6 +106,69 @@
             </div>
             <!-- Single student show modal End  -->
 
+            <!-- Single Student Edit Modal Start  -->
+            <div class="modal fade" id="editStudent">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5">Edit Student</h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="newStudentForm">
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="stu_name"
+                          class="form-control"
+                          placeholder="Student name"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="stu_roll"
+                          class="form-control"
+                          placeholder="Student roll"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="stu_reg"
+                          class="form-control"
+                          placeholder="Student reg"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="stu_photo"
+                          class="form-control"
+                          placeholder="Student photo url"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <button type="submit" class="btn btn-primary">
+                          Create
+                        </button>
+                        <button type="reset" class="btn btn-danger">
+                          Reset
+                        </button>
+                      </div>
+                      <div class="msg"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Single Student Edit Modal End  -->
+
             <div class="card shadow">
               <div class="card-body">
                 <button class="btn btn-secondary" id="students_view_reload"><i class="fa-solid fa-rotate"></i></button>

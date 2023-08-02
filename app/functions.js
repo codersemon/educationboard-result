@@ -70,3 +70,31 @@ function timeAgo(timestamp) {
   }
   return time;
 }
+
+/**
+ * 
+ * @param {*} length - output id length
+ * @returns - unique id
+ */
+function generateUniqueID(length = 26) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characterArray = new Uint8Array(length);
+  const uniqueID = [];
+
+  // Check if the browser supports the Web Cryptography API
+  if (typeof window.crypto === 'object' && typeof window.crypto.getRandomValues === 'function') {
+    window.crypto.getRandomValues(characterArray);
+  } else {
+    // Fallback to Math.random() if the Web Cryptography API is not available
+    for (let i = 0; i < length; i++) {
+      characterArray[i] = Math.floor(Math.random() * 256);
+    }
+  }
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = characterArray[i] % characters.length;
+    uniqueID.push(characters.charAt(randomIndex));
+  }
+
+  return uniqueID.join('');
+}
