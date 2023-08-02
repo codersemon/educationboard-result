@@ -25,7 +25,17 @@ newStudentForm.onsubmit = (e) => {
   ) {
     msg.innerHTML = createAlert("Roll & Reg must be number!", "danger");
   } else {
-    msg.innerHTML = createAlert("New Student Added!", "success");
+    // roll duplicate check
+    if (studentsInfo.some((item) => item.stu_roll == data.stu_roll)) {
+      msg.innerHTML = createAlert("Roll already exist!", "danger");
+      return;
+    }
+
+    // reg duplicate check
+    if (studentsInfo.some((item) => item.stu_reg == data.stu_reg)) {
+      msg.innerHTML = createAlert("Reg already exist!", "danger");
+      return;
+    }
 
     // add data to studentsInfo array
     studentsInfo.push({
@@ -42,6 +52,9 @@ newStudentForm.onsubmit = (e) => {
 
     // reset form
     e.target.reset();
+
+    // save success msg
+    msg.innerHTML = createAlert("New Student Added!", "success");
   }
 };
 
@@ -54,7 +67,7 @@ function showStudentsData() {
   let studentsContent = "";
 
   if (studentsInfo.length > 0) {
-    // add all student table view content 
+    // add all student table view content
     studentsInfo.forEach((student, index) => {
       studentsContent += `<tr class="stu-single stu-${index + 1}">
         <td>${index + 1}</td>
@@ -89,7 +102,8 @@ function showStudentsData() {
       </tr>`;
     });
   } else {
-    studentsContent = '<tr><td colspan="8" class="text-center">No Data Found!</td></tr>'
+    studentsContent =
+      '<tr><td colspan="8" class="text-center">No Data Found!</td></tr>';
   }
   studentListWrap.innerHTML = studentsContent;
 }
@@ -162,8 +176,8 @@ function showSingleStudent(roll) {
 /**********************
  * Reload Student View
  **********************/
-const reloadStudentView = document.getElementById('students_view_reload');
+const reloadStudentView = document.getElementById("students_view_reload");
 reloadStudentView.onclick = (e) => {
   // show new students
   showStudentsData();
-}
+};
