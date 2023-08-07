@@ -1,3 +1,9 @@
 .stu-single img{
     width: 60px;
 }
+table.table.table-striped.mt-2 {
+    border: 1px solid #ddd;
+}
+#search_result_section{
+    display: none;
+}

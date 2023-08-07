@@ -33,6 +33,8 @@
               Add Student
             </button>
 
+            <a href="./index.html" class="btn btn-success mb-3">Search Result</a>
+
             <!-- Modal -->
             <div class="modal fade" id="addNewStudent">
               <div class="modal-dialog modal-dialog-centered">
@@ -251,12 +253,12 @@
             </div>
             <!-- Add Result Modal End  -->
 
-            <!-- View Result Modal Start  -->
-            <div class="modal fade" id="viewResult">
+            <!-- Edit Result Modal Modal Start  -->
+            <div class="modal fade" id="editResult">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5">Result Details</h1>
+                    <h1 class="modal-title fs-5">Edit Marks</h1>
                     <button
                       type="button"
                       class="btn-close"
@@ -265,12 +267,70 @@
                     ></button>
                   </div>
                   <div class="modal-body">
-                    <h2>Result is comming soon! ☺</h2>
+                    <form id="editResultForm">
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="bangla"
+                          class="form-control"
+                          placeholder="Bangla Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="english"
+                          class="form-control"
+                          placeholder="English Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="math"
+                          class="form-control"
+                          placeholder="Math Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="science"
+                          class="form-control"
+                          placeholder="Science Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="social_science"
+                          class="form-control"
+                          placeholder="Social Science Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          name="religion"
+                          class="form-control"
+                          placeholder="Religion Marks"
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <input type="hidden" name="id" />
+                      </div>
+                      <div class="mb-2">
+                        <button type="submit" class="btn btn-primary">
+                          Update Marks
+                        </button>
+                      </div>
+                      <div class="result-msg"></div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- View Result Modal End  -->
+            <!-- Edit Result Modal End  -->
 
             <div class="card shadow">
               <div class="card-body">
@@ -300,6 +360,8 @@
         </div>
       </div>
     </section>
+
+
 
     <!-- bootstrap script  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>

@@ -83,7 +83,7 @@ function showStudentsData() {
         <td>${student.stu_reg}</td>
         <td>${timeAgo(student.created_at)}</td>
         <td>
-          ${student.result == null ? `<button class="btn btn-success" onclick="addResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#addResult">Add Result</button>` : `<button class="btn btn-info" onclick="showStudentResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#viewResult">View Result</button>`}
+          ${student.result == null ? `<button class="btn btn-success" onclick="addResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#addResult">Add Result</button>` : `<button class="btn btn-info" onclick="editResult('${student.id}')" data-bs-toggle="modal" data-bs-target="#editResult">Edit Marks</button>`}
         </td>
         <td>
           <button class="btn btn-info" onclick="showSingleStudent('${
@@ -190,6 +190,7 @@ const editStudentForm = document.getElementById("editStudentForm");
 const editImgPrev = document.getElementById("edit_prev");
 const editMsg = document.querySelector('.edit-msg');
 function editSingleStudent(id) {
+  editMsg.innerHTML = '';
   // select student data
   const student = studentsInfo.filter((item) => item.id == id);
 
@@ -209,6 +210,7 @@ function editSingleStudent(id) {
 // update student data on edit form submit
 editStudentForm.onsubmit = (e) => {
   e.preventDefault();
+  const editConfirmation = confirm('Are you sure about the data update?');
 
   // get new data on form submit
   const form_data = new FormData(e.target);
@@ -226,7 +228,9 @@ editStudentForm.onsubmit = (e) => {
     // get student data index
     const stuIndex = studentsInfo.findIndex((item) => item.id == data.id);
 
-    // update data in array
+    // update data if user confirm 
+    if(editConfirmation){
+      // update data in array
     studentsInfo[stuIndex] = {
       ...studentsInfo[stuIndex],
       ...data,
@@ -240,6 +244,9 @@ editStudentForm.onsubmit = (e) => {
 
     // Update msg 
     editMsg.innerHTML = createAlert("Data update success!", "success");
+    }else{
+      alert('Your data is safe!');
+    }
   }
 };
 
@@ -255,6 +262,7 @@ function addResult(id){
 // add result to db on form submit 
 addResultForm.onsubmit = (e) => {
   e.preventDefault();
+  resultMsg.innerHTML = '';
 
   // get marks from input 
   const form_data = new FormData(e.target);
@@ -284,12 +292,54 @@ addResultForm.onsubmit = (e) => {
 
     // save success msg 
     resultMsg.innerHTML = createAlert('Save success!', 'success');
+
+    // reset input 
+    e.target.reset();
   }
 }
 
 /**********************
- * View / Show Student Result
+ * Edit Student Result
  **********************/
-function showStudentResult(id){
-  
+const editResultForm = document.getElementById('editResultForm');
+function editResult(id){
+  // get student info 
+  const student = studentsInfo.find(item => item.id === id);
+
+  // set existing marks 
+  editResultForm.querySelector('input[name="bangla"').value = student.result.bangla;
+  editResultForm.querySelector('input[name="english"').value = student.result.english;
+  editResultForm.querySelector('input[name="math"').value = student.result.math;
+  editResultForm.querySelector('input[name="science"').value = student.result.science;
+  editResultForm.querySelector('input[name="social_science"').value = student.result.social_science;
+  editResultForm.querySelector('input[name="religion"').value = student.result.religion;
+  editResultForm.querySelector('input[name="id"').value = student.id;
+}
+
+// edit mark form submit 
+editResultForm.onsubmit = (e) => {
+  e.preventDefault();
+
+  // get data 
+  const form_data = new FormData(e.target);
+  const data = Object.fromEntries(form_data.entries());
+
+  const {id, ...withoutId} = data;
+
+  console.log(data);
+
+  // get student 
+  const stuIndex = studentsInfo.findIndex(item => item.id == data.id);
+
+  // update student data in array 
+  studentsInfo[stuIndex] = {
+    ...studentsInfo[stuIndex],
+    result: withoutId
+  }
+
+  // send data to LS 
+  sendDataLS('students', studentsInfo);
+
+  console.log(stuIndex);
+
 }

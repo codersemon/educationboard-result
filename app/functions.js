@@ -72,17 +72,21 @@ function timeAgo(timestamp) {
 }
 
 /**
- * 
+ *
  * @param {*} length - output id length
  * @returns - unique id
  */
 function generateUniqueID(length = 26) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const characterArray = new Uint8Array(length);
   const uniqueID = [];
 
   // Check if the browser supports the Web Cryptography API
-  if (typeof window.crypto === 'object' && typeof window.crypto.getRandomValues === 'function') {
+  if (
+    typeof window.crypto === "object" &&
+    typeof window.crypto.getRandomValues === "function"
+  ) {
     window.crypto.getRandomValues(characterArray);
   } else {
     // Fallback to Math.random() if the Web Cryptography API is not available
@@ -96,7 +100,76 @@ function generateUniqueID(length = 26) {
     uniqueID.push(characters.charAt(randomIndex));
   }
 
-  return uniqueID.join('');
+  return uniqueID.join("");
 }
+
+/**
+ * 
+ * @param {*} marks - input one subject marks
+ * @returns - gpa & grade
+ */
+const getGPAGrade = (marks, sub) => {
+  let gpa;
+  let grade;
+
+  if (marks >= 0 && marks < 33) {
+    gpa = 0.0;
+    grade = "F";
+  } else if (marks >= 33 && marks < 40) {
+    gpa = 1.0;
+    grade = "D";
+  } else if (marks >= 40 && marks < 50) {
+    gpa = 2.0;
+    grade = "C";
+  } else if (marks >= 50 && marks < 60) {
+    gpa = 3.0;
+    grade = "B";
+  } else if (marks >= 60 && marks < 70) {
+    gpa = 3.5;
+    grade = "A-";
+  } else if (marks >= 70 && marks < 80) {
+    gpa = 4.0;
+    grade = "A";
+  } else if (marks >= 80) {
+    gpa = 5.0;
+    grade = "A+";
+  } else {
+    gpa = "Invalid";
+    grade = "Invalid";
+  }
+
+  return { gpa, grade, sub };
+};
+
+/**
+ * 
+ * @param {*} gpa - each subject gpa
+ * @param {*} subcount - total subject
+ * @returns - final gpa & grade
+ */
+const calculateGPAGrade = (gpa, subcount) => {
+  let finalgpa = (gpa / subcount).toFixed(2);
+  let grade;
+
+  if (finalgpa >= 0 && finalgpa < 1.00) {
+    grade = "F";
+  } else if (finalgpa >= 1.00 && finalgpa < 2.00) {
+    grade = "D";
+  } else if (finalgpa >= 2.00 && finalgpa < 3.00) {
+    grade = "C";
+  } else if (finalgpa >= 3.00 && finalgpa < 3.50) {
+    grade = "B";
+  } else if (finalgpa >= 3.50 && finalgpa < 4.00) {
+    grade = "A-";
+  } else if (finalgpa >= 4.00 && finalgpa < 5.00) {
+    grade = "A";
+  } else if (finalgpa >= 5.00) {
+    grade = "A+";
+  } else {
+    grade = "Invalid";
+  }
+
+  return { finalgpa, grade };
+};
 
 
