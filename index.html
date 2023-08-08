@@ -39,7 +39,15 @@
       </div>
     </header>
 
-    <section class="py-3">
+    <section
+      class="text-center d-flex justify-content-center align-items-center preloader"
+    >
+      <div class="spinner-border text-success" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </section>
+
+    <section class="py-3 search-form-section">
       <div class="container">
         <div class="row">
           <div class="col-md-4 offset-md-4">
@@ -77,13 +85,13 @@
     </section>
 
     <!-- search result start -->
-    <section id="search_result_section">
+    <section id="search_result_section" class="mt-4">
       <div class="container">
         <div class="row">
           <div class="col-md-6 offset-md-3">
             <div class="card">
               <div class="card-header">
-                <h3 class="text-center">Result 2023</h3>
+                <h3 class="text-center title"></h3>
               </div>
               <div class="card-body">
                 <div class="result"></div>

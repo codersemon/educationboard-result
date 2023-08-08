@@ -108,7 +108,7 @@ function generateUniqueID(length = 26) {
  * @param {*} marks - input one subject marks
  * @returns - gpa & grade
  */
-const getGPAGrade = (marks, sub) => {
+const getGPAGrade = (marks) => {
   let gpa;
   let grade;
 
@@ -138,7 +138,7 @@ const getGPAGrade = (marks, sub) => {
     grade = "Invalid";
   }
 
-  return { gpa, grade, sub };
+  return { gpa, grade};
 };
 
 /**

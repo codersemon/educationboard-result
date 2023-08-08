@@ -302,6 +302,8 @@ addResultForm.onsubmit = (e) => {
  * Edit Student Result
  **********************/
 const editResultForm = document.getElementById('editResultForm');
+const resultEditMsg = document.querySelector('.mark-edit-msg');
+const modalClose = document.querySelector('#editResult .btn-close');
 function editResult(id){
   // get student info 
   const student = studentsInfo.find(item => item.id === id);
@@ -326,8 +328,6 @@ editResultForm.onsubmit = (e) => {
 
   const {id, ...withoutId} = data;
 
-  console.log(data);
-
   // get student 
   const stuIndex = studentsInfo.findIndex(item => item.id == data.id);
 
@@ -340,6 +340,12 @@ editResultForm.onsubmit = (e) => {
   // send data to LS 
   sendDataLS('students', studentsInfo);
 
-  console.log(stuIndex);
+  // update success msg 
+  resultEditMsg.innerHTML = createAlert('Update success!', 'success');
+
+  // close modal 
+  setTimeout(() => {
+    modalClose.click();
+  }, 1000);
 
 }
